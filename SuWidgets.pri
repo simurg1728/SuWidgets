@@ -39,5 +39,12 @@ SOURCES += ThrottleableWidget.cpp \
 
 WIDGET_HEADERS += ThrottleableWidget.h SuWidgetsHelpers.h Version.h WFHelpers.h
 
+win32 {
+include($$PWD/../sigutils/sigutils.pri)
+include($$PWD/../libthirdparty/libsndfile-1.2.2.pri)
+}
+
+unix {
 CONFIG += link_pkgconfig
 PKGCONFIG += sigutils fftw3 sndfile volk
+}

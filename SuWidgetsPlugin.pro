@@ -36,7 +36,16 @@ SOURCES     = ConstellationPlugin.cpp TransitionPlugin.cpp HistogramPlugin.cpp L
     ColorChooserButtonPlugin.cpp \
     MultiToolBoxPlugin.cpp
 RESOURCES   = icons.qrc
-LIBS        += -L. -lsuwidgets
+
+unix: LIBS += -L. -lsuwidgets
+
+win32 {
+CONFIG(release, debug|release): BUILD_CONFIG = release
+CONFIG(debug, debug|release): BUILD_CONFIG = debug
+LIBS += -L$$PWD/../build/SuWidgets/$$BUILD_CONFIG/ -lsuwidgets
+CONFIG += skip_target_version_ext
+DEFINES += no_plugin_name_prefix
+}
 
 greaterThan(QT_MAJOR_VERSION, 4) {
 CONFIG += plugin
